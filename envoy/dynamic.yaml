@@ -1,8 +1,8 @@
 dynamic_resources:
   lds_config:
-    path: "/home/petter/envoy/lds.yaml"
+    path: "/home/petter/Code/envoy-host/envoy/lds.yaml"
   cds_config:
-    path: "/home/petter/envoy/cds.yaml"
+    path: "/home/petter/Code/envoy-host/envoy/cds.yaml"
 admin:
   access_log_path: "/dev/null"
   address:

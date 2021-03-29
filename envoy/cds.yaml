@@ -7,7 +7,7 @@ resources:
   eds_cluster_config:
     service_name: pihole
     eds_config:
-      path: "/home/petter/envoy/eds_pihole.yaml"
+      path: "/home/petter/Code/envoy-host/envoy/eds_pihole.yaml"
 - "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster        
   name: watering-control-backend
   connect_timeout: 0.25s
@@ -16,4 +16,4 @@ resources:
   eds_cluster_config:
     service_name: watering-control-backend
     eds_config:
-      path: "/home/petter/envoy/eds_wateringcontrol.yaml"
+      path: "/home/petter/Code/envoy-host/envoy/eds_wateringcontrol.yaml"
