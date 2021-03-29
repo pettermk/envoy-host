@@ -24,6 +24,14 @@ resources:
               route:
                 prefix_rewrite: "/"
                 cluster: pihole
+          - name: certbot
+            domains:
+            - "homeautomation-api.kvalvaag-tech.com"
+            routes:
+            - match:
+                prefix: "/.well-known/acme-challenge"
+              route:
+                cluster: certbot
         http_filters:
         - name: envoy.filters.http.router
 - "@type": type.googleapis.com/envoy.config.listener.v3.Listener        

@@ -17,3 +17,12 @@ resources:
     service_name: watering-control-backend
     eds_config:
       path: "/home/petter/Code/envoy-host/envoy/eds_wateringcontrol.yaml"
+- "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster        
+  name: certbot
+  connect_timeout: 0.25s
+  type: EDS
+  lb_policy: round_robin
+  eds_cluster_config:
+    service_name: certbot
+    eds_config:
+      path: "/home/petter/Code/envoy-host/envoy/eds_certbot.yaml"
