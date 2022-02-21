@@ -27,6 +27,7 @@ resources:
           - name: certbot
             domains:
             - "homeautomation-api.kvalvaag-tech.com"
+            - "superset.kvalvaag-tech.com"
             routes:
             - match:
                 prefix: "/.well-known/acme-challenge"
@@ -58,6 +59,14 @@ resources:
                 prefix: "/"
               route:
                 cluster: watering-control-backend
+          - name: superset
+            domains:
+            - "superset.kvalvaag-tech.com"
+            routes:
+            - match:
+                prefix: "/"
+              route:
+                cluster: superset
         http_filters:
         - name: envoy.filters.http.router
     transport_socket:  
