@@ -27,6 +27,15 @@ resources:
     eds_config:
       path: "/home/petter/Code/envoy-host/envoy/eds_superset.yaml"
 - "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster        
+  name: zipkin
+  connect_timeout: 3s
+  type: EDS
+  lb_policy: round_robin
+  eds_cluster_config:
+    service_name: zipkin
+    eds_config:
+      path: "/home/petter/Code/envoy-host/envoy/eds_zipkin.yaml"
+- "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster        
   name: certbot
   connect_timeout: 0.25s
   type: EDS

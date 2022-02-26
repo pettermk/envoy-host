@@ -48,6 +48,15 @@ resources:
         "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
         codec_type: auto
         stat_prefix: ingress_http
+        generate_request_id: true
+        tracing:
+          provider:
+            name: envoy.tracers.zipkin
+            typed_config:
+              "@type": type.googleapis.com/envoy.config.trace.v3.ZipkinConfig
+              collector_cluster: zipkin
+              collector_endpoint: "/api/v2/spans"
+              collector_endpoint_version: HTTP_JSON
         route_config:
           name: local_route
           virtual_hosts:
@@ -59,6 +68,13 @@ resources:
                 prefix: "/"
               route:
                 cluster: watering-control-backend
+            response_headers_to_add:
+            - header:
+                key: "x-b3-traceid"
+                value: "%REQ(x-b3-traceid)%"
+            - header:
+                key: "x-request-id"
+                value: "%REQ(x-request-id)%"
           - name: superset
             domains:
             - "superset.kvalvaag-tech.com"
@@ -67,6 +83,13 @@ resources:
                 prefix: "/"
               route:
                 cluster: superset
+            response_headers_to_add:
+            - header:
+                key: "x-b3-traceid"
+                value: "%REQ(x-b3-traceid)%"
+            - header:
+                key: "x-request-id"
+                value: "%REQ(x-request-id)%"
         http_filters:
         - name: envoy.filters.http.router
     transport_socket:  
